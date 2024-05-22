@@ -4,7 +4,7 @@ window =  turtle.Screen()
 window.title ("Serpent Game")
 window.bgcolor("gray")
 window.setup(width=600, height=600)
-window.tracer()#
+window.tracer()
 
 #Cabeza de la serpiente
 cabeza = turtle.Turtle()
