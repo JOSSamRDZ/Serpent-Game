@@ -15,9 +15,25 @@ cabeza.speed(0)
 cabeza.shape("square")
 cabeza.penup()#Aunque movamos el elemeno no deja ningun rastro
 cabeza.goto(0,0)#Le da una posición al elemento
-cabeza.direction = "right"
+cabeza.direction = "stop"
+# Funciones para cambiar la dirección de la serpiente
+def arriba():
+    if cabeza.direction != "down":  # Evitar movimiento en dirección opuesta
+        cabeza.direction = "up"
 
-#Funciones
+def abajo():
+    if cabeza.direction != "up":
+        cabeza.direction = "down"
+
+def izquierda():
+    if cabeza.direction != "right":
+        cabeza.direction = "left"
+
+def derecha():
+    if cabeza.direction != "left":
+        cabeza.direction = "right"
+
+#Funcion mov para el set de movimientos
 def mov():
     if cabeza.direction == "up":
         y = cabeza.ycor() #Obtiene la cordenada del elemnto
@@ -32,8 +48,13 @@ def mov():
         x = cabeza.xcor() #Obtiene la cordenada del elemnto
         cabeza.setx(x+10)
         
-
-
+#Teclado
+#Conectamos el teclado, despues de las funciones del control del elemento y direccón
+window.listen()
+window.onkeypress(arriba,"Up")
+window.onkeypress(abajo,"Down")
+window.onkeypress(izquierda,"Left")
+window.onkeypress(derecha,"Right")
 #Crear un bucle principal o while loop
 while True:
     window.update() #CUANDO CREAMOS UN JUEGO TEMEMOS QUE TENER UN BULE PRINCIPAL
