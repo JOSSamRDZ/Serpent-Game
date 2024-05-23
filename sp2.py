@@ -52,7 +52,7 @@ def mov():
         cabeza.setx(x + 10)
 
 # Configuración del teclado
-window.listen()
+window.listen()#Funcion que nos permite escuchar las teclas de laws flechas del teclado
 window.onkeypress(arriba, "Up")
 window.onkeypress(abajo, "Down")
 window.onkeypress(izquierda, "Left")
