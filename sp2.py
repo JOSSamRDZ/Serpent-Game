@@ -1,6 +1,6 @@
 import turtle
 import time  # Usamos el módulo time para ralentizar la velocidad de nuestro elemento
-
+import random # para manejar la aparición de la comida 
 # Intervalo de pausa entre movimientos
 posponer = 0.1
 
@@ -18,6 +18,15 @@ cabeza.shape("square")
 cabeza.penup()  # Evita que la serpiente deje un rastro al moverse
 cabeza.goto(0, 0)  # Establece la posición inicial de la serpiente
 cabeza.direction = "stop"
+
+# Comida
+comida = turtle.Turtle()
+comida.speed(0)
+comida.shape("circle")
+comida.color("red")
+comida.penup()
+comida.goto(0,0)
+
 
 # Funciones para cambiar la dirección de la serpiente
 def arriba():
@@ -61,6 +70,10 @@ window.onkeypress(derecha, "Right")
 # Bucle principal del juego
 while True:
     window.update()  # Actualiza la ventana
+    if cabeza.distance(comida) < 20: #20 por que si la distancia entre los dos objetos es igual a sus medidas significa que se han tocado 
+       x= random.randint(-280,280) #el margen es igual a casi el tamaño de la cuadricula
+       y= random.randint(-280,280)
+       comida.goto(x,y)
     mov()
     time.sleep(posponer)  # Pausa la ejecución para ralentizar el movimiento de la serpiente
 
