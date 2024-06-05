@@ -1,6 +1,7 @@
 import turtle
 import time  # Usamos el módulo time para ralentizar la velocidad de nuestro elemento
 import random  # para manejar la aparición de la comida
+
 # Intervalo de pausa entre movimientos
 posponer = 0.1
 
@@ -30,33 +31,26 @@ comida.penup()
 comida.goto(0, 0)
 
 # Segmentos / cuerpo de la serpiente
-# Usamos una lista para agregarle cuerpo a la serpiente cada vez que coma una fruta
 segmento = []
-
 
 # Funciones para cambiar la dirección de la serpiente
 def arriba():
     if cabeza.direction != "down":  # Evita que la serpiente se mueva en dirección opuesta
         cabeza.direction = "up"
 
-
 def abajo():
     if cabeza.direction != "up":
         cabeza.direction = "down"
 
-
 def izquierda():
     if cabeza.direction != "right":
         cabeza.direction = "left"
-
 
 def derecha():
     if cabeza.direction != "left":
         cabeza.direction = "right"
 
 # Función para mover la serpiente
-
-
 def mov():
     if cabeza.direction == "up":
         y = cabeza.ycor()  # Obtiene la coordenada Y actual de la serpiente
@@ -71,28 +65,26 @@ def mov():
         x = cabeza.xcor()
         cabeza.setx(x + 10)
 
-
 # Configuración del teclado
 window.listen()  # Funcion que nos permite escuchar las teclas de las flechas del teclado
 window.onkeypress(arriba, "Up")
 window.onkeypress(abajo, "Down")
 window.onkeypress(izquierda, "Left")
-window.onkeypress(derecha, "Right")#cuando se presiona una tecla específica, se ejecutará la función vinculada.
+window.onkeypress(derecha, "Right")  # cuando se presiona una tecla específica, se ejecutará la función vinculada.
 
 # Bucle principal del juego
 while True:
     window.update()  # Actualiza la ventana
-    #Coliciones bordes
-    if cabeza.xcor() > 280 or cabeza.xcor() < -280 or cabeza.ycor() > 280 or cabeza.ycor() < -290:
+    # Colisiones bordes
+    if cabeza.xcor() > 280 or cabeza.xcor() < -280 or cabeza.ycor() > 280 or cabeza.ycor() < -280:
         time.sleep(1)
-        cabeza.goto(0,0)
+        cabeza.goto(0, 0)
         cabeza.direction = "stop"
-        #Esconder los segmentos
+        # Esconder los segmentos
         for seg in segmento:
-            seg.goto(1000,1000)
-        #Limpiar lista de segmentos
+            seg.goto(1000, 1000)
+        # Limpiar la lista de segmentos
         segmento.clear()
-        
     # 20 por que si la distancia entre los dos objetos es igual a sus medidas significa que se han tocado
     if cabeza.distance(comida) < 20:
         # el margen es igual a casi el tamaño de la cuadricula
@@ -106,16 +98,16 @@ while True:
         nuevo_segmento.color("black")
         nuevo_segmento.penup()
         segmento.append(nuevo_segmento)
-    #mover el cuerpo de la serpiente
-    totalSeg= len(segmento)
-    for index in range(totalSeg - 1,0,-1 ):
+    # Mover el cuerpo de la serpiente
+    totalSeg = len(segmento)
+    for index in range(totalSeg - 1, 0, -1):
         x = segmento[index - 1].xcor()
         y = segmento[index - 1].ycor()
-        segmento[index].goto(x,y)
+        segmento[index].goto(x, y)
     if totalSeg > 0:
         x = cabeza.xcor()
         y = cabeza.ycor()
-        segmento[0].goto(x,y)
+        segmento[0].goto(x, y)
     mov()
     # Pausa la ejecución para ralentizar el movimiento de la serpiente
     time.sleep(posponer)
